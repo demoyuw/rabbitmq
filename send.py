@@ -1,6 +1,7 @@
 import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+node = pika.URLParameters('amqp://yuwei:openstack@10.50.0.82:5672/')
+connection = pika.BlockingConnection(node)
 channel = connection.channel()
 channel.queue_declare(queue='hello')
 

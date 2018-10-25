@@ -1,7 +1,7 @@
-import pika 
+import pika
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
+node = pika.URLParameters('amqp://yuwei:openstack@10.50.0.82:5672/')
+connection = pika.BlockingConnection(node)
 channel = connection.channel()
 
 channel.queue_declare(queue='hello')
@@ -15,5 +15,5 @@ channel.basic_consume(callback,
                       queue='hello',
                       no_ack=True)
 
-# channel.start_consuming()
+channel.start_consuming()
 connection.close()
